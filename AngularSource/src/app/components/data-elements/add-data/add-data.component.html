@@ -1,0 +1,34 @@
+<form class="example-form center" #formInfo="ngForm" id="dataForm">
+  <mat-form-field hintLabel="Max 100 characters" class="example-full-width">
+      <input matInput #input [formControl]="name" name="name" required maxlength="100" placeholder="Name" type="text" class="form-control" [(ngModel)]="myData.name">
+      <mat-hint align="end">{{input.value?.length || 0}}/100</mat-hint>
+      <mat-error *ngIf="name.hasError('required')">Please enter the name</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="description" name="description" class="form-control" #descriptionInfo="ngModel" [(ngModel)]="myData.description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput #input2 [formControl]="amount" name="amount" maxlength="6" placeholder="Amount" type="text" pattern="[0-9]*" digitOnly class="example-right-align form-control" [(ngModel)]="textAmount">
+    <mat-hint align="end">{{input2.value?.length || 0}}/6</mat-hint>
+    <mat-error *ngIf="amount.hasError('pattern')">Please enter the number</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input matInput [matDatepicker]="picker" name="date" min={{today}} class="form-control" [(ngModel)]="dateToShow" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <mat-label>Is Private</mat-label>
+      <mat-select #privateInfo="ngModel" class="form-control" name="private" [(value)]="isPrivate" [(ngModel)]="isPrivate">
+        <mat-option *ngFor="let o of isPrivateArr" [value]="o">{{o}}</mat-option>
+      </mat-select>
+  </mat-form-field>
+  
+  <button type="button" name="Add Data" id="AddData" class="btn btn-secondary col-md-12" [disabled]="name.hasError('required') || amount.hasError('pattern')" (click)="AddData()">{{stringForAddOp}}</button>
+  <button type="button" name="Delete Data" id="DeleteData" class="btn btn-secondary col-md-12" [disabled]="name.hasError('required') || amount.hasError('pattern')" (click)="DeleteData()" *ngIf="idFrom!==''">Delete Data</button>
+  
+</form>
