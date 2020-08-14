@@ -2,7 +2,7 @@ This is an example for UpstartTest system.
 
 * .NET Core 3 server
 * MSSql database
-* Angular + Material 9 front.
+* Angular + Material 9 front - with lazy load.
 
 - All CRUD query for sql database.
 - Entity Framework Code First
